@@ -1,8 +1,8 @@
 import os 
 
+
 print('Llŷr :)')
 match = True
-turns =0
 while match == True:
     print("""        
 
@@ -17,10 +17,12 @@ while match == True:
                                         ¦      ¦  
                                      A3 ¦  B3  ¦  C3
     """)
+    turns = 0
     p1 = True
     p1win = p2win = False
     move =""
-    A1,A2,A3,B1,B2,B3,C1,C2,C3=" "," "," "," "," "," "," "," "," "
+    A1=A2=A3=B1=B2=B3=C1=C2=C3=" "
+    win = A1==A2==A3=='X' or A1==B1==C1=='X' or A2==B2==C2=='X' or A3==B3==C3=='X' or B1==B2==B3=='X' or C1==C2==C3=='X' or A1==B2==C3=='X' or C1==B2==A3=='X'or A1==A2==A3=='O' or A1==B1==C1=='O' or A2==B2==C2=='O' or A3==B3==C3=='O' or B1==B2==B3=='O' or C1==C2==C3=='O' or A1==B2==C3=='O' or C1==B2==A3=='O'
     Player1 = str.capitalize(input("Enter Player1's name:\n"))
     Player2 = str.capitalize(input("Enter Player2's name:\n"))
     if Player1 == '':
@@ -29,7 +31,7 @@ while match == True:
         Player2 = 'Player2'
     os.system("cls")
     print('Llŷr :)')
-    while not p1win or p2win:
+    while not win:
         print(f"""        
 
                                         TIC TAC TOE   
@@ -80,15 +82,14 @@ while match == True:
                 print('Llŷr :)')
                 p1 = not p1
             turns += 1
-        p1win = A1==A2==A3=='X' or A1==B1==C1=='X' or A2==B2==C2=='X' or A3==B3==C3=='X' or B1==B2==B3=='X' or C1==C2==C3=='X' or A1==B2==C3=='X' or C1==B2==A3=='X'
-        p2win = A1==A2==A3=='O' or A1==B1==C1=='O' or A2==B2==C2=='O' or A3==B3==C3=='O' or B1==B2==B3=='O' or C1==C2==C3=='O' or A1==B2==C3=='O' or C1==B2==A3=='O'
         if turns == 9:
             break
-    if p1win:
-        print("\n Congratulations!!! ", Player1, 'won')
-    elif p2win:
-        print('\n Congratulations!!!', Player2, 'won.')
-    elif turns == 9:
+    if win:
+        if turn == "X":
+            print("\n Congratulations!!! ", Player1, 'won')
+        elif turn == "Y":
+            print('\n Congratulations!!!', Player2, 'won.')
+    else:
         print('Its a tie.')
     if input("\n Rematch? (y/n)") == 'n':
         match = False
