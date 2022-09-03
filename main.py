@@ -19,12 +19,23 @@ while match == True:
     """)
     turns = 0
     p1 = True
-    p1win = p2win = False
     move =""
+    win = False
     A1=A2=A3=B1=B2=B3=C1=C2=C3=" "
-    win = A1==A2==A3=='X' or A1==B1==C1=='X' or A2==B2==C2=='X' or A3==B3==C3=='X' or B1==B2==B3=='X' or C1==C2==C3=='X' or A1==B2==C3=='X' or C1==B2==A3=='X'or A1==A2==A3=='O' or A1==B1==C1=='O' or A2==B2==C2=='O' or A3==B3==C3=='O' or B1==B2==B3=='O' or C1==C2==C3=='O' or A1==B2==C3=='O' or C1==B2==A3=='O'
+    while True:
+        mode = input("Enter game mode(ai/pvp)")
+        if mode =="ai":
+            ai = True
+            break
+        elif mode =="pvp":
+            ai = False
+            break
+        else:
+            print("Invalid inout")
     Player1 = str.capitalize(input("Enter Player1's name:\n"))
-    Player2 = str.capitalize(input("Enter Player2's name:\n"))
+    Player2 = 'AI'
+    if ai == False:
+        Player2 = str.capitalize(input("Enter Player2's name:\n"))
     if Player1 == '':
         Player1 = 'Player1'
     elif Player2 == '':
@@ -53,8 +64,11 @@ while match == True:
                 turn = 'X'
                 print(f"{Player1}'s turn")
             elif not p1:
-                turn = 'O'
-                print(f"{Player2}'s turn")
+                if ai == True:
+                    pass
+                if ai == False:
+                    turn = 'O'
+                    print(f"{Player2}'s turn")
             move = input()
             if str.capitalize(move)== "A1" and A1 == ' ':
                 A1 = turn
@@ -80,10 +94,12 @@ while match == True:
             if loop != True:
                 os.system('cls')
                 print('Llŷr :)')
-                p1 = not p1
+                if not ai:
+                    p1 = not p1
             turns += 1
         if turns == 9:
             break
+        win = A1==A2==A3=='X' or A1==B1==C1=='X' or A2==B2==C2=='X' or A3==B3==C3=='X' or B1==B2==B3=='X' or C1==C2==C3=='X' or A1==B2==C3=='X' or C1==B2==A3=='X'or A1==A2==A3=='O' or A1==B1==C1=='O' or A2==B2==C2=='O' or A3==B3==C3=='O' or B1==B2==B3=='O' or C1==C2==C3=='O' or A1==B2==C3=='O' or C1==B2==A3=='O'
     if win:
         if turn == "X":
             print("\n Congratulations!!! ", Player1, 'won')
